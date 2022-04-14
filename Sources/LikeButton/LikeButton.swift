@@ -23,8 +23,7 @@ public struct LikeButton: View {
             .overlay(
                 Group {
                     DotsView(count: 9, radius: 20, speed: 0.1, scale: self.isLiked ? 0.1 : 0.8)
-                    DotsView(count: 9, radius: 25, speed: 0.2, scale: self.isLiked ? 0.1 : 0.6)
-                        .rotationEffect(Angle(degrees: 20))
+                    DotsView(count: 9, radius: 25, speed: 0.2, scale: self.isLiked ? 0.1 : 0.6, initialRotation: 20)
                 }
                     .opacity(self.opacity)
             )
@@ -34,12 +33,13 @@ public struct LikeButton: View {
         }
         .onChange(of: self.isLiked) { isLiked in
             self.scale = 1.0
+            let rotationDuration = 0.2
             if isLiked {
-                withAnimation(.linear(duration: 0.2)) {
+                withAnimation(.linear(duration: rotationDuration)) {
                     self.scale = 1.2
                     self.opacity = 1
                 }
-                withAnimation(.linear(duration: 0.1).delay(0.2)) {
+                withAnimation(.linear(duration: rotationDuration / 2).delay(rotationDuration)) {
                     self.opacity = 0
                 }
             }

@@ -12,6 +12,7 @@ struct DotsView: View {
     var radius: CGFloat = 30
     var speed: Double = 0.1
     var scale: CGFloat = 1.0
+    var initialRotation = 0.0
 
     var body: some View {
         ZStack {
@@ -22,13 +23,13 @@ struct DotsView: View {
                     .scaleEffect(self.scale)
                     .animation(.linear(duration: self.speed), value: self.scale)
                     .offset(y: -self.radius)
-                    .rotationEffect(angle(index: idx))
+                    .rotationEffect(self.rotationEffectAngle(idx: idx))
             }
         }
     }
 
-    func angle(index: Int) -> Angle {
-        Angle(degrees: (360 / Double(self.count)) * Double(index))
+    func rotationEffectAngle(idx: Int) -> Angle {
+        return Angle(degrees: ((360 / Double(self.count)) * Double(idx) + self.initialRotation))
     }
 }
 
