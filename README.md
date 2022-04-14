@@ -1,3 +1,2 @@
 # LikeButton
-
-A description of this package.
+Animated "Like" Button in SwiftUI
